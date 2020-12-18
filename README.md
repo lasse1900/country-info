@@ -1,3 +1,5 @@
+- Remember - to get the REACT_APP_APIXU_KEY from the service provider
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
