@@ -5,16 +5,14 @@ const Weather = ({ capital }) => {
   const [weather, setWeather] = useState({});
   const [query, setQuery] = useState('');
 
-  const search = evt => {
-    if (evt.key === "Enter") {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`)
-        .then(res => res.json())
-        .then(result => {
-          setWeather(result);
-          setQuery('');
-          console.log(result);
-        });
-    }
+  const search = () => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`)
+      .then(res => res.json())
+      .then(result => {
+        setWeather(result);
+        setQuery('');
+        console.log(result);
+      });
   }
 
   const dateBuilder = (d) => {
@@ -29,19 +27,19 @@ const Weather = ({ capital }) => {
     return `${day} ${date} ${month} ${year}`
   }
 
+  const handleClick = () => {
+    console.log('clicked')
+  }
+
   return (
     <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
       <main>
-        <div className="search-box">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search..."
-            onChange={e => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={search}
-          />
+        <div>
+          <button onClick={() => search()}>
+            get weather
+            </button>
         </div>
+
         {(typeof weather.main != "undefined") ? (
           <div>
             <div className="location-box">
@@ -62,3 +60,8 @@ const Weather = ({ capital }) => {
 };
 
 export default Weather;
+
+
+// <button onClick={() => setCounter(counter + 1)}>
+
+// <button onClick={() => handleClick()}>
